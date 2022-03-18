@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/general.css">
+    <script src="javascripts/general.js"></script>
+    <script src="javascripts/search.js"></script>
+    <title>
+        TpWorld
+    </title>
+    <style>
+        body {
+            background-image: url(images/background.jpeg);
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+        }
+
+        .inPageSearchBox {
+            z-index: 1000;
+            box-sizing: border-box;
+            position: fixed;
+            top: 50px;
+            height: 50px;
+            width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-bottom: 1px solid black;
+        }
+
+        .inPageSearchBox input[type=text] {
+            position: relative;
+            right: 10px;
+            box-sizing: border-box;
+            width: 400px;
+            height: 25px;
+            outline: none;
+
+            border: 2px solid turquoise;
+            border-right: 0;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .inPageSearchBox input[type=text]:focus {
+            background-color: aliceblue;
+        }
+
+        .inPageSearchBox .searchButton {
+            position: relative;
+            right: 10px;
+            box-sizing: border-box;
+            width: 50px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5px;
+
+            border: 2px solid turquoise;
+            background-color: turquoise;
+            color: white;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .inPageSearchBox .searchButton:hover {
+            cursor: pointer;
+            background-color: aqua;
+            border: aqua;
+        }
+
+        .resultBox {
+            box-sizing: border-box;
+            position: absolute;
+            background-color: white;
+            top: 100px;
+            width: 900px;
+            height: 100%;
+            padding: 20px 20px 20px 20px;
+        }
+
+        .resultBox .smileFace {
+            position: absolute;
+            right: 0;
+            bottom: 50px;
+            width: 250px;
+            height: 250px;
+            transition: 2s;
+        }
+
+        .smileFace:hover {
+            transform: rotate(360deg);
+        }
+
+        .tips {
+            font-size: 20px;
+            position: absolute;
+            right: 50px;
+            bottom: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>bigTitle()</script>
+
+    <form class="inPageSearchBox" id="searchForm" onsubmit="return searchResult()">
+        <input type="text" id="inputText" placeholder="搜索..."">
+        <input class=" searchButton" type="submit" value="查 询">
+    </form>
+    <div class="resultBox" id="resultBox">
+        <br>
+        <div class="tips">
+            鼠标放到笑脸上
+            <i class="icon ion-arrow-down-a"></i>
+        </div>
+        <img class="smileFace" src="images/img.png">
+    </div>
+
+    <script>bottomBar()</script>
+</body>
+
+</html>

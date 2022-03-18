@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="stylesheets/general.css">
+    <script src="javascripts/general.js"></script>
+    <script src="javascripts/sign.js"></script>
+    <title>
+        TpWorld
+    </title>
+    <style>
+        body {
+            background-image: url(images/background.jpeg);
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        i {
+            font-size: xx-large;
+        }
+
+        .signBox {
+            box-sizing: border-box;
+            height: 600px;
+            width: 1100px;
+            display: flex;
+            align-items: center;
+            border-radius: 50px 50px 50px 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .8);
+            position: absolute;
+            top: 15%;
+        }
+
+        .signBox .label {
+            height: 600px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            font-size: xx-large;
+        }
+
+        .signPic {
+            position: absolute;
+            right: 50px;
+            height: 600px;
+            width: 500px;
+            background-image: url(images/travel.jpeg);
+            background-size: cover;
+            transition: 0.5s;
+        }
+
+        .signPic:hover {
+            transform: translateX(-500px);
+        }
+
+        #signUpForm:hover~.signPic {
+            transform: translateX(-500px);
+        }
+
+        .label:hover+.signPic {
+            transform: translateX(-500px);
+        }
+
+        .signForm {
+            height: 600px;
+            width: 500px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .signForm div {
+            display: flex;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            height: 30px;
+            width: 400px;
+        }
+
+        .signForm select {
+            text-align: center;
+            width: 100px;
+        }
+
+        .signForm input[type=text],
+        input[type=password],
+        input[type=email] {
+            box-sizing: border-box;
+            padding: 0 10px;
+            margin: 30px 0;
+            height: 30px;
+            width: 300px;
+            font-size: 15px;
+            border: 1px solid;
+            border-color: turquoise;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .signForm input[type=text]:hover,
+        input[type=text]:focus,
+        input[type=password]:hover,
+        input[type=password]:focus,
+        input[type=email]:hover,
+        input[type=email]:focus {
+            background-color: aliceblue;
+        }
+
+        .button {
+            height: 30px;
+            width: 150px;
+            background-color: turquoise;
+            border: 0px;
+            text-decoration: none;
+            font-size: 15px;
+            color: white;
+            transition-duration: 0.4s;
+        }
+
+        .button:hover {
+            cursor: pointer;
+            background-color: aqua;
+            border: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <script>bigTitle()</script>
+
+    <div class="signBox">
+        <p class="label">登录</p>
+
+        <form class="signForm" id="signInForm" name="signInForm">
+            <h1>欢迎！</h1>
+            <div>
+                <i class="icon ion-person"></i>
+                <input type="text" name="user" placeholder="用户名" autocomplete='off'>
+            </div>
+            <div>
+                <i class="icon ion-locked"></i>
+                <input type="password" name="password" placeholder="密码" autocomplete='off'>
+            </div>
+            <div class="buttonBox">
+                <input type="submit" class="button" value="登录">
+            </div>
+            <a href="forget.html">忘记密码？</a>
+        </form>
+
+        <form class="signForm" id="signUpForm" name="signUpForm" onsubmit="return isValid()">
+            <div>
+                <i class="icon ion-person"></i>
+                <input type="text" name="user" placeholder="用户名" autocomplete='off'>
+            </div>
+            <div>
+                <i class="icon ion-locked"></i>
+                <input type="password" name="password" placeholder="密码" autocomplete='off'>
+            </div>
+            <div>
+                <i class="icon ion-locked"></i>
+                <input type="password" name="confirm" placeholder="确认密码" autocomplete='off'>
+            </div>
+            <div>
+                <i class="icon ion-email"></i>
+                <input type="email" name="email" placeholder="邮箱" autocomplete='off'>
+            </div>
+            <div>
+                省份:
+                <select id="province" onchange="cityOfProvince()">
+                    <option value="">--请选择--</option>
+                    <script>
+                        for (var i = 0; i < provinceArr.length; i++) {
+                            document.write("<option value='" + i + "'>" + provinceArr[i] + "</option>");
+                        }
+                    </script>
+                </select>
+                城市:
+                <select id="city">
+                    <option value="">--请选择--</option>
+                </select>
+            </div>
+            <div class="buttonBox">
+                <input type="submit" class="button" value="注册">
+            </div>
+        </form>
+
+        <p class="label">注册</p>
+
+        <div class="signPic"></div>
+    </div>
+
+    <script>bottomBar()</script>
+</body>
+
+</html>

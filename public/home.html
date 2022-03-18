@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylesheets/general.css">
+    <script src="javascripts/general.js"></script>
+    <title>
+        TpWorld
+    </title>
+    <style>
+        body {
+            height: 100%;
+            background-image: url(images/background.jpeg);
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 15%;
+            width: 1100px;
+            height: 600px;
+            overflow: hidden;
+        }
+
+        .card .text {
+            position: absolute;
+            width: 600px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            /* background-color: aliceblue; */
+            transition: 0.6s ease-in-out;
+        }
+
+        .text .a {
+            color: antiquewhite;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 50px;
+            position: absolute;
+            transition: 0.6s;
+        }
+
+        .text .b {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.6s 0.4s ease-out;
+        }
+
+        .card img {
+            position: absolute;
+            width: 1100px;
+            height: 600px;
+            transition: 0.6s;
+        }
+
+        .textBoard {
+            opacity: 0;
+            box-sizing: border-box;
+            position: absolute;
+            top: 70px;
+            left: 20px;
+            width: 500px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: white;
+            padding: 20px 0 0 20px;
+            border: 2px solid turquoise;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .card:hover+.textBoard {
+            opacity: 1;
+        }
+
+        .textBoard .textBox {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .card:hover>img {
+            transform: scale(1.5, 1.5);
+        }
+
+        .card:hover .button {
+            opacity: 1;
+        }
+
+        .card:hover .text {
+            transform: translateX(450px) translateY(-200px);
+        }
+
+        .card:hover .a {
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+
+        .card:hover .b {
+            opacity: 1;
+        }
+
+        .button {
+            z-index: 1000;
+            height: 30px;
+            width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: turquoise;
+            border: 0px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-size: 15px;
+            color: white;
+            transition-duration: 0.4s;
+            opacity: 0;
+        }
+
+        .button:hover {
+            cursor: pointer;
+            background-color: aqua;
+            border: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <script>bigTitle()</script>
+
+    <div class="card">
+        <img src="images/flyboat.jpg">
+        <a href="sign.html" class="button">
+            登 录
+        </a>
+        <div class="text">
+            <div class="a">欢迎来到TPWorld!</div>
+            <img class="b" src="images/QR.png">
+        </div>
+    </div>
+
+    <div class="textBoard">
+        <div class="textBox">
+            <div>这是一个为了完成webGIS和GIS工程与应用两门课程开发的网页</div>
+            <div>拥有者是yc，yc是个新手，很菜</div>
+            <div>如果您有什么建议，请告诉yc，yc会很感谢你！</div>
+            <div>数据库暂时是用不了的，搜索库里面是我们班的名单</div>
+        </div>
+        <ol class="toDoList">
+            To Do List:
+            <li>完成主要的几个页面</li>
+            <li>完善搜索功能</li>
+            <li>载入数据库</li>
+            <li>完成自定义皮肤功能</li>
+            <li>完成多语言切换</li>
+        </ol>
+    </div>
+
+    <script>bottomBar()</script>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>TpWorld</title>
+    <script src="v6.13.0/build/ol.js"></script>
+    <link rel="stylesheet" href="v6.13.0/css/ol.css">
+    <link rel="stylesheet" href="stylesheets/general.css">
+    <script src="javascripts/general.js"></script>
+    <style>
+        html,
+        body {
+            background-image: url(images/background.jpeg);
+            background-repeat: no-repeat;
+        }
+
+        .map {
+            background-color: turquoise;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+
+        .menu {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            height: 58px;
+            width: 75px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .menu .button {
+            background-color: turquoise;
+            display: block;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            margin: 2px;
+            height: 25px;
+            width: 75px;
+            border: turquoise solid 2px;
+            border-radius: 0 0 2px 2px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        }
+
+        .inPageSearchBox {
+            z-index: 20;
+            position: fixed;
+            height: 40px;
+            width: 400px;
+            top: 10px;
+            left: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        }
+
+        .inPageSearchBox input[type=text] {
+            box-sizing: border-box;
+            width: 360px;
+            height: 40px;
+            outline: none;
+
+            border: 2px solid turquoise;
+            border-right: 0;
+            outline: none;
+        }
+
+        .inPageSearchBox input[type=text]:focus {
+            background-color: aliceblue;
+        }
+
+        .inPageSearchBox .searchButton {
+            box-sizing: border-box;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5px;
+            outline: none;
+
+            border: 2px solid turquoise;
+            background-color: turquoise;
+            color: white;
+            background-image: url("images/searchicon.png");
+            background-size: 75%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .inPageSearchBox .searchButton:hover {
+            cursor: pointer;
+            background-color: aqua;
+            border: 2px solid aqua;
+        }
+
+        .sideBar {
+            position: fixed;
+            top: 100px;
+            right: 10px;
+            height: fit-content;
+            width: 50px;
+            z-index: 20;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+            z-index: 1000;
+            padding: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+            list-style-type: none;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .sideBar li {
+            width: 50px;
+            height: 50px;
+        }
+
+        .sideBar li a {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: turquoise;
+            text-decoration: none;
+        }
+
+        .sideBar li a:hover {
+            background-color: #9c88ff;
+        }
+        
+        .detail {
+            z-index: 1000;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 10px;
+            text-decoration: none;
+            background-color: rgba(255, 255, 255, .5);
+        }
+    </style>
+</head>
+
+<body>
+    <form class="inPageSearchBox">
+        <input type="text" placeholder="搜索...">
+        <input type="submint" class="searchButton">
+    </form>
+
+    <div class="map" id="map">
+        <div class="menu">
+            <button class="button" onclick="fitTochangsha()">长沙</button>
+            <button class="button" onclick="fitTopoint()">地信楼</button>
+        </div>
+    </div>
+    
+    <a class="detail" href="http://beian.miit.gov.cn/" target="_blank">湘ICP备2022003783号</a>
+
+    <div class="sideBar">
+        <li> <a href="home.html">主页</a></li>
+        <li><a href="ui.html">地图</a></li>
+        <li><a href="contact.html">联系</a></li>
+        <li><a href="about.html">关于</a></li>
+    </div>
+
+    <script type="text/javascript">
+        //创建地图-----------------------------------------------------------------------------------------------------------
+        var map = new ol.Map({
+            target: "map",
+            view: new ol.View({
+                center: [12952902.8394, 4852401.2052],
+                zoom: 10
+            })
+        })
+        //地图图层-----------------------------------------------------------------------------------------------------------
+        var tdt_source = new ol.source.XYZ({
+            url: "http://t0.tianditu.com/DataServer?T=vec_w&tk=39aa46c83a722815e2ba2fc6d8685cd6&x={x}&y={y}&l={z}"
+        })
+        var tdt_layer = new ol.layer.Tile({
+            source: tdt_source
+        })
+        map.addLayer(tdt_layer);
+        //标注图层-----------------------------------------------------------------------------------------------------------
+        var tdt_source_marker = new ol.source.XYZ({
+            url: "http://t0.tianditu.com/DataServer?T=cva_w&tk=39aa46c83a722815e2ba2fc6d8685cd6&x={x}&y={y}&l={z}"
+        });
+        var tdt_layer_marker = new ol.layer.Tile({
+            source: tdt_source_marker
+        })
+        map.addLayer(tdt_layer_marker);
+        //按钮脚本-----------------------------------------------------------------------------------------------------------
+        var changsha = [12570904.1896, 3269680.4449];
+        var changsha_center = [12571883.0743, 3277963.5524];
+        function fitTochangsha() {
+            map.getView().animate({
+                center: changsha_center,
+                duration: 2000,
+            })
+        }
+        function fitTopoint() {
+            var center = map.getView().getCenter();
+            map.getView().animate(
+                {
+                    center: [
+                        center[0] + (changsha[0] - changsha[0]) / 2,
+                        center[1] + (changsha[1] - changsha[1]) / 2
+                    ],
+                    rotation: Math.PI,
+                    easing: ol.easing.easeIn
+                },
+                {
+                    center: changsha,
+                    rotation: 2 * Math.PI,
+                    easing: ol.easing.easeOut,
+                    zoom: 18
+                }
+            )
+        }
+    </script>
+</body>
+
+</html>
